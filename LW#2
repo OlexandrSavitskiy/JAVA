@@ -1,0 +1,155 @@
+package com.company;
+import java.util.Scanner;
+
+public class Main {
+    public static void menu(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter task number: ");
+        int task = in.nextInt();
+        switch(task){
+            case 1:
+                task1();
+                break;
+            case 2:
+                task2();
+                break;
+            case 3:
+                task3();
+                break;
+            case 4:
+                task4();
+                break;
+            case 10:
+                break;
+            default:
+                System.out.println("This task not exist, try again!");
+                menu();
+                break;
+        }
+    }
+
+
+
+    public static void task1(){
+        Scanner in = new Scanner(System.in);
+        int x, y, z;
+        boolean error = true;
+        do {
+            System.out.println("Enter х:");
+            x = in.nextInt();
+            System.out.println("Enter y:");
+            y = in.nextInt();
+            System.out.println("Enter z:");
+            z = in.nextInt();
+            try
+            {
+                double sum =0;
+                double r1 = z-(y*2);
+                if(r1 == 0) throw new Exception("0 Division!");
+
+                double r2 = (3*x/(r1)); //Exception
+                if(r2 < 0) throw new Exception("Part below zero!");
+
+                sum =  Math.sqrt(r2)-y*z+ Math.sin(x*x);
+
+                System.out.println("Result: "+sum);
+                error = false;
+
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+        } while(error);
+        menu();
+    }
+
+    public static void task2(){
+        Scanner in = new Scanner(System.in);
+        int x;
+        int sum = 0;
+        System.out.println("Enter х:");
+        x = in.nextInt();
+        try{
+            if(x > 100)
+                throw new Exception("X can`t be more than 100!");
+
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+            task2();
+        }
+
+        for(int i = 1; i <= 100; i++){
+            if(i % 2 != 0 && i<x)
+                sum += i;
+        }
+
+        System.out.println("Result (for): " + sum);
+
+        sum = 0;
+        int i = 1;
+        while(i<=100){
+            if(i % 2 != 0 && i<x)
+                sum += i;
+            i++;
+        }
+
+        System.out.println("Result (while): " + sum);
+
+        sum = 0;
+        i = 1;
+        do{
+            if(i % 2 != 0 && i<x)
+                sum += i;
+            i++;
+        } while(i<=100);
+
+        System.out.println("Result (do while): " + sum);
+
+        menu();
+    }
+
+
+    public static void task3(){
+        Scanner in = new Scanner(System.in);
+        float sum = 0;
+
+
+        for (int i = 1; i <= 20; i++)
+        {
+            for (int j = 1; j <= i; j++)
+            {
+                sum +=1+ Math.pow(2,i)+Math.pow(2,j);
+            }
+        }
+        System.out.println("Result: " + sum);
+
+        menu();
+    }
+
+    public static void task4(){
+
+        double a = 1;
+        double b = 6;
+        for (double i = a; i < b; i+= 0.2)
+        {
+            try{
+                if(i == 0)
+                    throw new Exception("Х going to infinity");
+                System.out.println("y = " + 1.0 / (Math.log(i)) + " x = " + i);
+                }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+        }
+        System.out.println("For exit enter 10");
+        menu();
+    }
+
+    public static void main(String[] args) {
+        menu();
+    }
+}
