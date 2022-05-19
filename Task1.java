@@ -1,64 +1,75 @@
+import java.util.Locale;
 import java.util.Scanner;
 
+import static java.lang.Character.isDigit;
+
 public class Task1 {
-    public static void OutputMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
+    public static void ArrayOutput(String[] arr) {
+        if(arr.length == 0) {
+            System.out.println("Масив пустий");
+            return;
         }
+
+        for (String item: arr)
+            System.out.println(item);
     }
 
-    public static void InputMatrix(int[][] matrix) {
+    public static int StringNumCount(String str) {
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (isDigit(str.charAt(i)))
+                count++;
+        }
+
+        return count;
+    }
+
+    public static boolean isPr(char c) {
+        boolean result = false;
+
+
+        result = !(c == 'a' || c == 'e' || c == 'y' || c == 'u' || c == 'i' || c == 'o'
+                || c == 'а' || c == 'о' || c == 'е' || c == 'у' || c == 'і' || c == 'и');
+
+        return result;
+    }
+
+    public static void StringTask2(String[] arr) {
+        for (String item: arr) {
+            if(isPr(item.toLowerCase(Locale.ROOT).charAt(0))) {
+                System.out.println(item);
+            }
+        }
+
+
+    }
+
+    public static void Start() {
         Scanner in = new Scanner(System.in);
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j] = in.nextInt();
-            }
-        }
-    }
 
-    public static void ChangeMatrix(int[][] matrix) {
-        //елементи бічної діагоналі замінити нулями
-        for (int i = 0; i < matrix.length; i++)
-        {
-            matrix[i][matrix.length - 1 - i] = 0;
-        }
+        System.out.println("Введіть рядок:");
 
-        //інші елементи (не бічна діагональ) піднести до 2
-        for (int i = 0; i < matrix.length; i++)
-        {
-            for (int j = 0; j < matrix[0].length; j++)
-            {
-                if(j != matrix.length - 1 - i)
-                    matrix[i][j] *= matrix[i][j];
-            }
-        }
-    }
+        String line = new String();
+        String[] words = new String[0];
 
-    public static void Task1() {
-        Scanner in = new Scanner(System.in);
-        int n;
-
+        boolean Error = true;
         do {
-            System.out.print("Введіть розмір матриці:");
-            n = in.nextInt();
-            if(n < 1) System.out.println("Розмір матриці не може бути меньше 1!");
-        }
-        while (n < 1);
+            try {
+                line = in.nextLine();
+                if (line.length() <= 0) throw new Exception("Пустий рядок.");
 
-        int[][] matrix = new int[n][n];
+                words = line.split(" ");
+                if (words.length <= 0) throw new Exception("Пустий рядок.");
 
-        System.out.println("Введіть дані матриці:");
-        InputMatrix(matrix);
+                Error = false;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (Error);
 
-        System.out.println("Матриця:");
-        OutputMatrix(matrix);
-
-        System.out.println("Матриця після перетворення (Перетворити її наступним чином: всі елементи бічної діагоналі замінити нулями, всі інші елементи – піднести до квадрату:");
-        ChangeMatrix(matrix);
-        OutputMatrix(matrix);
+        System.out.println("Кількість цифр у тексті: " + StringNumCount(line));
+        System.out.println("Слова, яки починаются з приголосних літер: ");
+        StringTask2(words);
 
     }
 }
