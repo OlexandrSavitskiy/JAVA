@@ -7,14 +7,12 @@ public class Main {
         String sel;
         do
         {
-            System.out.println("Лабораторна 5");
-            System.out.println("Завдання:");
+            System.out.println("Лабораторна 6. Завдання:");
             System.out.println("1 — Завдання 1");
             System.out.println("2 — Завдання 2");
-            System.out.println("3 — Завдання 3");
             System.out.println("- — завершити програму");
             System.out.print("Введіть номер завдання: ");
-            sel = in.nextLine();
+            sel = in.next();
             System.out.println();
 
             switch (sel)
@@ -26,10 +24,6 @@ public class Main {
                 case "2":
                     System.out.println("Завдання №2:");
                     Task2.Start();
-                    break;
-                case "3":
-                    System.out.println("Завдання №3:");
-                    Task3.Start();
                     break;
                 case "-":
                     return;
